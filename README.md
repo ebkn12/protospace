@@ -1,24 +1,58 @@
-# README
+# Database
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## User
+|column|type|option|
+|:-:|:-:|:-:|
+|name|string|null: false, unique: true|
+|email||use 'devise'|
+|password||use 'devise'|
+|avatar|text||
+|profile|text||
+|position|string||
+|occupation|string||
 
-Things you may want to cover:
+### association
+- has_many :protypes, :likes, :comments
 
-* Ruby version
 
-* System dependencies
+## Prototype
+|column|type|option|
+|:-:|:-:|:-:|
+|title|text|null: false|
+|catch_copy|text||
+|concept|text||
+|user_id|integer|null: false, foreign_key: true|
 
-* Configuration
+### association
+- has_many :captured_images, :likes, :comments
 
-* Database creation
+## CapturedImage
+|column|type|option|
+|:-:|:-:|:-:|
+|content|text|null: false|
+|status|integer||
+|prototype_id|integer|null: false, foreign_key: true|
 
-* Database initialization
+### association
+- belons_to :prototype
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+## Like
+|column|type|option|
+|:-:|:-:|:-:|
+|user_id|integer|null: false, foreign_key: true|
+|prototype_id|integer|null: false, foreignkey: true|
 
-* Deployment instructions
+### association
+belongs_to :user, :prototype
 
-* ...
+
+## Comment
+|column|type|option|
+|:-:|:-:|:-:|
+|content|text|null: false|
+|user_id|integer|foreign_key: true, null: false|
+|prototype_id|integer|foreign_key: true, null: false|
+
+### association
+- belongs_to :user, :prototype
