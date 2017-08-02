@@ -4,27 +4,24 @@
       %span.icon-bar
       %span.icon-bar
       %span.icon-bar
-    %a.navbar-brand(href="/")
-      = image_tag("logo.png", alt: "PROTO TYPE - SHARE THE PROTOTYPE", height: "36px")
+    = link_to "/", class: "navbar-brand" do
+      = image_tag "logo.png", alt: "PROTO TYPE - SHARE THE PROTOTYPE", height: "36px"
     .navbar-collapse.collapse.navbar-responsive-collapse
       //not login
       %ul.nav.navbar-nav.navbar-right
         %li
           .btn.btn-primary.navbar-btn
-            %a{href: "/login"}
+            = link_to "/login" do
               Get Started
       //login
       %ul.nav.navbar-nav.navbar-right
         %li.dropdown
-          %a.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown", href: "#", role: "button"}
+          = link_to "#", class: "dropdown-toggle", "aria-expanded": "false", "data-toggle": "dropdown", role: "button" do
             UserName
             %span.caret
           %ul.dropdown-menu{role: "menu"}
-            %li
-              %a{href: "#"} Profile Edit
-            %li
-              %a{href: "#"} Logout
+            %li= link_to "Profile Edit", "#"
+            %li= link_to "Logout", "#"
         %li
           .btn.btn-primary.navbar-btn
-            %a{href: "/proto/new"}
-              New Proto
+            = link_to "New Proto", "/proto/new"
