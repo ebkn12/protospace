@@ -30,7 +30,7 @@
 |column|type|option|
 |:-:|:-:|:-:|
 |content|text|null: false|
-|status|integer||
+|status|integer|null: false, default: 0, limit: 1|
 |prototype_id|integer|null: false, foreign_key: true|
 
 ### association
