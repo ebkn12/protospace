@@ -1,27 +1,29 @@
 .navbar.navbar-default.navbar-static-top.navbar-fixed-top
   .container
-    %button.navbar-toggle(type="button" data-toggle="collapse" data-target=".navbar-responsive-collapse")
+    %button.navbar-toggle(type='button' data-toggle='collapse' data-target='.navbar-responsive-collapse')
       %span.icon-bar
       %span.icon-bar
       %span.icon-bar
-    = link_to "/", class: "navbar-brand" do
-      = image_tag "logo.png", alt: "PROTO TYPE - SHARE THE PROTOTYPE", height: "36px"
+    = link_to '/', class: 'navbar-brand' do
+      = image_tag 'logo.png', alt: 'PROTO TYPE - SHARE THE PROTOTYPE', height: '36px'
     .navbar-collapse.collapse.navbar-responsive-collapse
-      //not login
-      %ul.nav.navbar-nav.navbar-right
-        %li
-          .btn.btn-primary.navbar-btn
-            = link_to "/login" do
-              Get Started
-      //login
-      %ul.nav.navbar-nav.navbar-right
-        %li.dropdown
-          = link_to "#", class: "dropdown-toggle", "aria-expanded": "false", "data-toggle": "dropdown", role: "button" do
-            UserName
-            %span.caret
-          %ul.dropdown-menu{role: "menu"}
-            %li= link_to "Profile Edit", "#"
-            %li= link_to "Logout", "#"
-        %li
-          .btn.btn-primary.navbar-btn
-            = link_to "New Proto", "/proto/new"
+      - if user_signed_in?
+        %ul.nav.navbar-nav.navbar-right
+          %li.dropdown
+            = link_to user_path(current_user), class: 'dropdown-toggle', 'aria-expanded': false, 'data-toggle': 'dropdown', role: 'button' do
+              = current_user.name
+              %span.caret
+            %ul.dropdown-menu{role: 'menu'}
+              %li
+                = link_to 'Edit profile', edit_user_path(current_user)
+              %li
+                = link_to 'Logout', destroy_user_session_path, method: :delete
+      - else
+        %ul.nav.navbar-nav.navbar-right
+          %li
+            .btn.btn-primary.navbar-btn
+              = link_to new_user_session_path do
+                Get Started
+          %li
+            .btn.btn-primary.navbar-btn
+              = link_to 'New Proto', new_prototype_path
