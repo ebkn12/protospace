@@ -1,0 +1,14 @@
+.alert {
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    border: none;
+    &-success,
+    &-notice {
+        background-color: $flash_success;
+    }
+    &-warning,
+    &-danger {
+        background-color: $flash_error;
+    }
+}

@@ -1,0 +1,30 @@
+.container.user-page
+  %header.user-nav
+    .media
+      .media-left
+        = image_tag current_user.avatar, size: '64x64', class: 'media-object'
+      .media-body
+        %h4#top-aligned-media.media-heading
+          = current_user.name
+          %span.label.label-default.project-number
+            =# user.prototypes.count
+            %i Projects
+        .proto-user
+          %span.degree
+          =# @user.affiliation
+        .row
+          .col-md-6
+            %h4 Profile
+            = @user.profile
+            %p
+          .col-md-6
+            %h4 Works
+            =# @user.works
+            %p
+.container.proto-list
+  .row
+    =# render
+.text-center
+  %ul.pagination
+    %li
+      =# paginate(@prototypes)
