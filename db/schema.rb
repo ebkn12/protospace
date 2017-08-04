@@ -55,4 +55,5 @@ ActiveRecord::Schema.define(version: 20170804060450) do
   end
 
   add_foreign_key "captured_images", "prototypes"
+  add_foreign_key "prototypes", "users"
 end
