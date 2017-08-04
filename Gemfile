@@ -17,6 +17,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'haml-rails'
 gem 'bootstrap-sass'
 gem 'devise'
+gem 'carrierwave'
 
 group :development, :test do
   gem 'byebug', platform: :mri
