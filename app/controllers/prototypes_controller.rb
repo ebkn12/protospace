@@ -1,19 +1,13 @@
 class PrototypesController < ApplicationController
   def index
-    @prototypes = Prototype.includes(:user, :captured_images).order('created_at desc')
+    @prototypes = Prototype.includes(:user)
+                           .order('created_at desc')
   end
 
   def show
     @prototype = Prototype.find(params[:id])
     @user = @prototype.user
-    @sub_images = []
-    @prototype.captured_images.each do |image|
-      if image.status == 1
-        @top_image = image
-      else
-        @sub_images << image
-      end
-    end
+    @main_image, @sub_images = divide_images(@prototype.captured_images)
   end
 
   def new
@@ -40,5 +34,14 @@ class PrototypesController < ApplicationController
       :captured_image,
       captured_images_attributes: %i[id content status]
     ).merge(user_id: current_user.id)
+  end
+
+  def divide_images(images)
+    sub = []
+    images.each do |image|
+      sub << image if image.status.zero?
+    end
+
+    [images.first, sub]
   end
 end

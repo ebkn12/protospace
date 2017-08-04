@@ -1,7 +1,10 @@
 .col-sm-4.col-md-3.proto-content
   .thumbnail
     = link_to prototype do
-      = image_tag("sample.png")
+      - if prototype.captured_images.any?
+        = image_tag prototype.captured_images.first.content.to_s
+      - else
+        = image_tag 'noimage-big.png'
       .caption
         %h3
           = prototype.title

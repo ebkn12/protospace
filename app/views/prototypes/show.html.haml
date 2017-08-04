@@ -19,7 +19,10 @@
         %span.num 20
   .row
     .col-md-9
-      = image_tag @top_image.content.to_s, class: 'img-responsive'
+      - if @main_image
+        = image_tag @main_image.content.to_s, class: 'img-responsive'
+      - else
+        = image_tag 'noimage-big.png'
     .col-md-3
       %ul.proto-sub-list.list-group
         - @sub_images.each do |sub|
@@ -44,9 +47,9 @@
   .row.proto-comments
     %h4.col-md-12
       Comments
-      %span.num (10)
+      %span.num (5)
     .col-md-8
-      - 10.times do
+      - 5.times do
         .media
           .media-left
             = link_to "#" do
