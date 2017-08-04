@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170804054658) do
+ActiveRecord::Schema.define(version: 20170804060450) do
+
+  create_table "captured_images", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.text     "content",      limit: 65535,             null: false
+    t.integer  "status",       limit: 1,     default: 0, null: false
+    t.integer  "prototype_id",                           null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.index ["prototype_id"], name: "index_captured_images_on_prototype_id", using: :btree
+  end
 
   create_table "prototypes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text     "title",      limit: 65535, null: false
@@ -45,4 +54,5 @@ ActiveRecord::Schema.define(version: 20170804054658) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "captured_images", "prototypes"
 end

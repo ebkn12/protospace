@@ -1,4 +1,4 @@
-class AvatarUploader < CarrierWave::Uploader::Base
+class ContentUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
   if Rails.env == 'test'
@@ -11,7 +11,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
-  process resize_to_fill: [300, 200]
+  process resize_to_fit: [300, 200]
 
   def extension_white_list
     %w[jpg jpeg gif png]

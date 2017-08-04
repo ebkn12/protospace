@@ -1,0 +1,2 @@
+class CapturedImage < ApplicationRecord
+end
