@@ -24,13 +24,13 @@
         .user-user-member.row
           .user-name.col-md-12
             = f.text_field :occupation, placeholder: 'Occupation'
-        %h4 Profile
-        .user-user-profile.row
-          .user-name.col-md-12
-            = f.text_area :profile, cols: 30, rows: 3, placeholder: 'Profile'
         %h4 Position
         .user-name_image.row
           .user-name.col-md-12
             = f.text_field :position, placeholder: 'Position'
+        %h4 Profile
+        .user-user-profile.row
+          .user-name.col-md-12
+            = f.text_area :profile, cols: 30, rows: 3, placeholder: 'Profile'
         .row.text-center.user-btn
     = f.submit class: 'btn btn-lg btn-primary btn-block', value: 'Save'

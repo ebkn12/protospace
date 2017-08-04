@@ -68,6 +68,10 @@ GEM
       railties (>= 4.1.0, < 5.1)
       responders
       warden (~> 1.2.3)
+    dotenv (2.2.1)
+    dotenv-rails (2.2.1)
+      dotenv (= 2.2.1)
+      railties (>= 3.2, < 5.2)
     erb2haml (0.1.5)
       html2haml
     erubis (2.7.0)
@@ -362,6 +366,7 @@ DEPENDENCIES
   carrierwave
   coffee-rails (~> 4.2)
   devise
+  dotenv-rails
   erb2haml
   fog
   haml-rails

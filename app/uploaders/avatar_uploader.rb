@@ -1,18 +1,17 @@
 class AvatarUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
-  storage :file
-  # if Rails.env == 'test'
-  #   storage :file
-  # else
-  #   storage :fog
-  # end
+  if Rails.env == 'test'
+    storage :file
+  else
+    storage :fog
+  end
 
   def store_dir
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
-  process resize_to_fill: [300, 200]
+  process resize_to_fill: [64, 64]
 
   def extension_white_list
     %w[jpg jpeg gif png]
