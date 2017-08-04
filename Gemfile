@@ -18,6 +18,8 @@ gem 'haml-rails'
 gem 'bootstrap-sass'
 gem 'devise'
 gem 'carrierwave'
+gem 'mini_magick'
+gem 'fog'
 
 group :development, :test do
   gem 'byebug', platform: :mri
