@@ -1,10 +1,11 @@
 class ContentUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
-  if Rails.env == 'test'
-    storage :file
-  else
+  case Rails.env
+  when 'development', 'production'
     storage :fog
+  when 'test'
+    storage :file
   end
 
   def store_dir

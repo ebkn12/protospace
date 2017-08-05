@@ -25,9 +25,9 @@
         = image_tag 'noimage-big.png'
     .col-md-3
       %ul.proto-sub-list.list-group
-        - @sub_images.each do |sub|
+        - @sub_images.each do |image|
           %li.list-group-item
-            = image_tag sub.content.to_s, class: 'img-responsive'
+            = image_tag image.content.to_s, class: 'img-responsive'
   .row.proto-description
     .col-md-3
       %h4 Catch Copy

@@ -5,30 +5,27 @@
         = image_tag @user.avatar, size: '64x64', class: 'media-object' if @user.avatar.present?
       .media-body
         %h4#top-aligned-media.media-heading
-          = @user.name
-          %span.label.label-default.project-number
-            = @user.prototypes.count
-            %i Projects
+          Top aligned media
+          .proto-user
+            = link_to "by #{@user.name}", @user
         .proto-user
           %span.degree
-          =# @user.affiliation
+          = @user.occupation
         .row
-          .col-md-6
-            %h4 Profile
-            = @user.profile
-            %p
           .col-md-6
             %h4 Position
             = @user.position
             %p
           .col-md-6
-            %h4 Occupation
-            = @user.occupation
+            %h4 Profile
+            = @user.profile
             %p
 .container.proto-list
+  %span.label.label-default.project-number
+    = @prototypes.count
+    %i Projects
   .row
-    = render @user.prototypes, partial: 'prototype/prototype'
-.text-center
+    = render @prototypes
   %ul.pagination
     %li
       =# paginate(@prototypes)

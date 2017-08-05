@@ -37,11 +37,6 @@ class PrototypesController < ApplicationController
   end
 
   def divide_images(images)
-    sub = []
-    images.each do |image|
-      sub << image if image.status.zero?
-    end
-
-    [images.first, sub]
+    [images.first, images.drop(1)]
   end
 end
