@@ -4,11 +4,11 @@
       %span.icon-bar
       %span.icon-bar
       %span.icon-bar
-    = link_to '/', class: 'navbar-brand' do
+    = link_to root_url, class: 'navbar-brand' do
       = image_tag 'logo.png', alt: 'PROTO TYPE - SHARE THE PROTOTYPE', height: '36px'
     .navbar-collapse.collapse.navbar-responsive-collapse
-      - if user_signed_in?
-        %ul.nav.navbar-nav.navbar-right
+      %ul.nav.navbar-nav.navbar-right
+        - if user_signed_in?
           %li.dropdown
             = link_to user_path(current_user), class: 'dropdown-toggle', 'aria-expanded': false, 'data-toggle': 'dropdown', role: 'button' do
               = current_user.name
@@ -18,12 +18,11 @@
                 = link_to 'Edit profile', edit_user_path(current_user)
               %li
                 = link_to 'Logout', destroy_user_session_path, method: :delete
-      - else
-        %ul.nav.navbar-nav.navbar-right
+        - else
           %li
             .btn.btn-primary.navbar-btn
               = link_to new_user_session_path do
                 Get Started
-          %li
-            .btn.btn-primary.navbar-btn
-              = link_to 'New Proto', new_prototype_path
+        %li
+          .btn.btn-primary.navbar-btn
+            = link_to 'New Proto', new_prototype_path

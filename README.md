@@ -24,6 +24,7 @@
 |user_id|integer|null: false, foreign_key: true|
 
 ### association
+- belons_to :user
 - has_many :captured_images, :likes, :comments
 
 ## CapturedImage
