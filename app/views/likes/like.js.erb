@@ -1,0 +1,2 @@
+$('#like_button').html('<%= escape_javascript(render("likes/like")) %>');
+$('#like_button .num').html('<%= @prototype.likes.count %>');

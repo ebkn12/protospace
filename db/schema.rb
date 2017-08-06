@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170804060450) do
+ActiveRecord::Schema.define(version: 20170806073432) do
 
   create_table "captured_images", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text     "content",      limit: 65535,             null: false
@@ -19,6 +19,15 @@ ActiveRecord::Schema.define(version: 20170804060450) do
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
     t.index ["prototype_id"], name: "index_captured_images_on_prototype_id", using: :btree
+  end
+
+  create_table "likes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "user_id",      null: false
+    t.integer  "prototype_id", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["prototype_id"], name: "index_likes_on_prototype_id", using: :btree
+    t.index ["user_id"], name: "index_likes_on_user_id", using: :btree
   end
 
   create_table "prototypes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -55,5 +64,7 @@ ActiveRecord::Schema.define(version: 20170804060450) do
   end
 
   add_foreign_key "captured_images", "prototypes"
+  add_foreign_key "likes", "prototypes"
+  add_foreign_key "likes", "users"
   add_foreign_key "prototypes", "users"
 end
