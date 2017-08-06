@@ -3,6 +3,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   has_many :prototypes
   has_many :likes, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   mount_uploader :avatar, AvatarUploader
 
