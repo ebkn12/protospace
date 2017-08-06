@@ -1,5 +1,5 @@
 .col-sm-4.col-md-3.proto-content
-  - if prototype.user_id == current_user.id
+  - if user_signed_in? && prototype.user_id == current_user.id
     .dropdown.drop_menu_location
       %button#dropdownMenu.btn.btn-default.dropdown-toggle{'data-toggle': 'dropdown', 'aria-expanded': false}
         Action
