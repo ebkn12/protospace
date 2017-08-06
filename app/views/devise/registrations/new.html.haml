@@ -6,12 +6,12 @@
         %h2 Register
         .user-name_image.row
           .user-name.col-md-10
-            = f.text_field :name, placeholder: 'User name'
+            = f.text_field :name, placeholder: 'User name', required: true
           .user-image.col-md-2
             = f.label :avatar, 'Add Image', class: 'btn-primary', id: 'add-image'
             = f.file_field :avatar, class: 'button btn btn-primary'
-        = f.email_field :email, autofocus: true, placeholder: 'E-Mail', class: 'user-email'
-        = f.password_field :password, autocomplete: 'off', placeholder: 'Password', class: 'user-password'
+        = f.email_field :email, autofocus: true, placeholder: 'E-Mail', class: 'user-email', required: true
+        = f.password_field :password, autocomplete: 'off', placeholder: 'Password', class: 'user-password', required: true
       .col-md-12
         %h4 Occupation
         .user-user-member.row

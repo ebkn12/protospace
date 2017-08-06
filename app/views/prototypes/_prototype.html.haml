@@ -5,9 +5,9 @@
         Action
       %ul.dropdown-menu{'aria-labbeledby': 'dropdownMenu1'}
         %li
-          = link_to 'Edit', edit_prototype_path(prototype), method: :delete, rel: 'nofollow'
+          = link_to 'Edit', edit_prototype_path(prototype), rel: 'nofollow'
         %li
-          = link_to 'Delete', prototype_path(prototype)
+          = link_to 'Delete', prototype_path(prototype), method: :delete
   .thumbnail
     = link_to prototype do
       - if prototype.captured_images.any?
