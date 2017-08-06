@@ -1,0 +1,9 @@
+.media
+  .media-left
+    = link_to comment.user do
+      = image_tag comment.user.avatar.to_s, size: '64x64', class: 'media-object' if comment.user.avatar.present?
+  .media-body
+    %h4#top-aligned-media.media-heading
+      = comment.user.name
+    %p
+      = comment.content

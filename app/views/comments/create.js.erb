@@ -1,0 +1,5 @@
+$('#post-comment').prepend('<%= escape_javascript(render("comments/comment", comment: @comment)) %>');
+$('.comment-input').val('');
+var $comments_count = $('.proto-comments .num');
+console.log(Number($comments_count.text()) + 1);
+$comments_count.html(Number($comments_count.text()) + 1);

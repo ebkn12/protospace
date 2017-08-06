@@ -10,6 +10,11 @@ class PrototypesController < ApplicationController
   def show
     @prototype = set_prototype
     @user = @prototype.user
+    @comments = @prototype.comments
+                          .includes(:user)
+                          .page(params[:page])
+                          .order('created_at desc')
+    @comment = Comment.new
   end
 
   def new

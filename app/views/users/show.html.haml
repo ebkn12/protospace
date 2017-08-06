@@ -5,9 +5,10 @@
         = image_tag @user.avatar, size: '64x64', class: 'media-object' if @user.avatar.present?
       .media-body
         %h4#top-aligned-media.media-heading
-          Top aligned media
-          .proto-user
-            = link_to "by #{@user.name}", @user
+          = @user.name
+          %span.label.label-default.project-number
+            = @prototypes.count
+            %i Projects
         .proto-user
           %span.degree
           = @user.occupation
@@ -21,9 +22,6 @@
             = @user.profile
             %p
 .container.proto-list
-  %span.label.label-default.project-number
-    = @prototypes.count
-    %i Projects
   .row
     = render @prototypes
   %ul.pagination
