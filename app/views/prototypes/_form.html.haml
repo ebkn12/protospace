@@ -1,0 +1,51 @@
+- if @prototype.errors.any?
+  .alert.alert-warning
+    = "#{@prototype.errors.count}件のエラーがあります"
+  - @ptototype.errors.full_messages.each do |error|
+    = content_tag :div, error, class: 'alert alert-warning'
+= form_for @prototype, html: { class: 'container proto-new' } do |f|
+  .col-md-8.col-md-offset-2
+    %header.row.user-nav.row
+      .col-md-12
+        = f.label :title, 'Title'
+        = f.text_field :title, class: 'proto-new-title', placeholder: 'title', required: true
+    .row
+      .col-md-12
+        = f.label :captured_image, 'Main design'
+        .cover-image-upload
+          = f.fields_for :captured_images, @prototype.main_image do |image|
+            = image.file_field :content
+            = image.hidden_field :status, value: 1
+      .col-md-12
+        = f.label :captured_image, 'Sub design'
+        %ul.proto-sub-list.list-group
+          - 3.times do |i|
+            %li.list-group-item.col-md-4
+              - if @prototype.sub_images && sub_image = @prototype.sub_images[i]
+                .image-upload
+                  = f.fields_for :captured_images, sub_image do |image|
+                    = image.file_field :content
+              - else
+                -# .image-upload
+                -#   = f.fields_for :captured_images, sub_image do |image|
+                -#     = image.file_field :content
+                .image-upload-plus
+                  %span +
+    .row.proto-description
+      .col-md-12
+        = f.label :catch_copy, 'Catch copy'
+        = f.text_field :catch_copy, placeholder: 'Catch Copy'
+      .col-md-12
+        = f.label :concept, 'Concept'
+        = f.text_area :concept, cols: 30, rows: 4, placeholder: 'Concept'
+      .col-md-12
+        %h4 Tag List
+        .row
+          .col-md-3
+            %input{type: "text", placeholder: "Web Design"}/
+          .col-md-3
+            %input{type: "text", placeholder: "UI"}/
+          .col-md-3
+            %input{type: "text", placeholder: "Application"}/
+    .row.text-center.proto-btn
+      = f.submit yield(:form_button), class: 'btn btn-lg btn-primary btn-block'

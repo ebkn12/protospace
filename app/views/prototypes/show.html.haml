@@ -4,7 +4,10 @@
       .media
         .media-left
           = link_to @user do
-            = image_tag @user.avatar.to_s, class: 'media-object', 'data-holder-rendered': true, style: 'width: 64px; height: 64px;'
+            - if @user.avatar
+              = image_tag @user.avatar.to_s, class: 'media-object', 'data-holder-rendered': true, style: 'width: 64px; height: 64px;'
+            - else
+              = image_tag 'noimage.png'
         .media-body
           %h4#top-aligned-media.media-heading
             = @prototype.title
@@ -19,13 +22,13 @@
         %span.num 20
   .row
     .col-md-9
-      - if @main_image
-        = image_tag @main_image.content.to_s, class: 'img-responsive'
+      - if @prototype.main_image
+        = image_tag @prototype.main_image.content.to_s, class: 'img-responsive'
       - else
         = image_tag 'noimage-big.png'
     .col-md-3
       %ul.proto-sub-list.list-group
-        - @sub_images.each do |image|
+        - @prototype.sub_images.each do |image|
           %li.list-group-item
             = image_tag image.content.to_s, class: 'img-responsive'
   .row.proto-description

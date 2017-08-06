@@ -140,6 +140,12 @@ body {
     -webkit-box-shadow: none;
 }
 
+#dropdownMenu {
+    position: relative;
+    top: 30px;
+    left: 10px;
+}
+
 .btn-group .btn+.btn,
 .btn-group .btn+.btn-group,
 .btn-group .btn-group+.btn,
