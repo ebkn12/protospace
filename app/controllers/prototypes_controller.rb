@@ -2,19 +2,15 @@ class PrototypesController < ApplicationController
   before_action :authenticate_user!, only: %i[new create edit update destroy]
 
   def index
-    @prototypes = Prototype.includes(:user, :captured_images)
-                           .page(params[:page])
-                           .order('created_at desc')
+    @prototypes = Prototype.order_by_newest(params[:page])
   end
 
   def show
     @prototype = set_prototype
     @user = @prototype.user
-    @comments = @prototype.comments
-                          .includes(:user)
-                          .page(params[:page])
-                          .order('created_at desc')
+    @main_image, @sub_images = images_src(@prototype)
     @comment = Comment.new
+    @comments = @prototype.related_comments(params[:page])
   end
 
   def new
@@ -33,6 +29,7 @@ class PrototypesController < ApplicationController
 
   def edit
     @prototype = set_prototype
+    @main_image, @sub_images = images_src(@prototype)
   end
 
   def update
@@ -64,5 +61,12 @@ class PrototypesController < ApplicationController
 
   def set_prototype
     Prototype.find(params[:id])
+  end
+
+  def images_src(prototype)
+    main = prototype.main_image ? prototype.main_image.content.to_s : nil
+    sub  = prototype.sub_images ? prototype.sub_images.map(&:content).map(&:to_s) : nil
+
+    [main, sub]
   end
 end

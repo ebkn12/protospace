@@ -19,15 +19,15 @@
       = render 'likes/like'
   .row
     .col-md-9
-      - if @prototype.main_image
-        = image_tag @prototype.main_image.content.to_s, class: 'img-responsive'
+      - if @main_image
+        = image_tag @main_image, class: 'img-responsive'
       - else
         = image_tag 'noimage-big.png'
     .col-md-3
       %ul.proto-sub-list.list-group
-        - @prototype.sub_images.each do |image|
+        - @sub_images.each do |image|
           %li.list-group-item
-            = image_tag image.content.to_s, class: 'img-responsive'
+            = image_tag image, class: 'img-responsive'
   .row.proto-description
     .col-md-3
       %h4 Catch Copy
