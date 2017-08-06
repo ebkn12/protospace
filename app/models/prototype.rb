@@ -16,4 +16,25 @@ class Prototype < ApplicationRecord
   def sub_images
     captured_images.where(status: 0)
   end
+
+  scope :order_by_newest, lambda { |page|
+    includes(:user, :captured_images)
+      .order('created_at desc')
+      .page(page)
+  }
+
+  scope :order_by_popular, lambda { |page|
+    includes(:user, :captured_images)
+      .joins(:likes)
+      .order('likes_count desc')
+      .order('created_at desc')
+      .page(page)
+  }
+
+  def related_comments(page)
+    comments
+      .includes(:user)
+      .page(page)
+      .order('created_at desc')
+  end
 end

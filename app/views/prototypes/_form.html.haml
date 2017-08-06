@@ -1,7 +1,7 @@
 - if @prototype.errors.any?
   .alert.alert-warning
     = "#{@prototype.errors.count}件のエラーがあります"
-  - @ptototype.errors.full_messages.each do |error|
+  - @prototype.errors.full_messages.each do |error|
     = content_tag :div, error, class: 'alert alert-warning'
 = form_for @prototype, html: { class: 'container proto-new' } do |f|
   .col-md-8.col-md-offset-2
@@ -21,16 +21,17 @@
         %ul.proto-sub-list.list-group
           - 3.times do |i|
             %li.list-group-item.col-md-4
-              - if @prototype.sub_images && sub_image = @prototype.sub_images[i]
+              - if @prototype.sub_images
+                - sub_image = @prototype.sub_images[i]
                 .image-upload
                   = f.fields_for :captured_images, sub_image do |image|
                     = image.file_field :content
               - else
-                -# .image-upload
-                -#   = f.fields_for :captured_images, sub_image do |image|
-                -#     = image.file_field :content
-                .image-upload-plus
-                  %span +
+                .image-upload
+                  = f.fields_for :captured_images, sub_image do |image|
+                    = image.file_field :content
+                -# .image-upload-plus
+                -#   %span +
     .row.proto-description
       .col-md-12
         = f.label :catch_copy, 'Catch copy'
