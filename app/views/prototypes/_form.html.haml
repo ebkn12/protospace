@@ -40,13 +40,10 @@
         = f.label :concept, 'Concept'
         = f.text_area :concept, cols: 30, rows: 4, placeholder: 'Concept'
       .col-md-12
-        %h4 Tag List
+        = f.label :tag, 'Tags'
         .row
-          .col-md-3
-            %input{type: "text", placeholder: "Web Design"}/
-          .col-md-3
-            %input{type: "text", placeholder: "UI"}/
-          .col-md-3
-            %input{type: "text", placeholder: "Application"}/
+          - %w[Design UI APP].each_with_index do |content, i|
+            .col-md-3
+              = text_field_tag 'prototype[tag_list][]', @prototype.tags[i], placeholder: content
     .row.text-center.proto-btn
       = f.submit yield(:form_button), class: 'btn btn-lg btn-primary btn-block'

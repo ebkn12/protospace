@@ -22,10 +22,10 @@ gem 'mini_magick'
 gem 'fog'
 gem 'dotenv-rails'
 gem 'kaminari'
+gem 'acts-as-taggable-on'
 
 group :development, :test do
   gem 'byebug', platform: :mri
-  gem 'erb2haml'
 end
 
 group :development do
@@ -34,6 +34,8 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'pry-rails'
+  gem 'erb2haml'
+  gem 'bullet'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

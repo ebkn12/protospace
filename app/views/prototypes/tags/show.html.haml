@@ -1,0 +1,8 @@
+= provide :title, @tag_name
+.container
+  .row
+    .tag
+      .tag_header
+        = @tag_name
+      = render partial: 'prototypes/prototype', collection: @prototypes
+      = paginate @prototypes

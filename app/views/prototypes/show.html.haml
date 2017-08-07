@@ -1,3 +1,4 @@
+= provide :title, @prototype.title
 .container.proto-page
   %header.row.user-nav
     .col-md-6
@@ -40,10 +41,9 @@
     .col-md-3
       %h4 Tag List
       %ul.proto-tag-list.list-inline
-        %li
-          = link_to "iPad", "#", class: "btn btn-default"
-        %li
-          = link_to "wireframe", "#", class: "btn btn-default"
+        - @prototype.tags.each do |tag|
+          %li
+            = link_to tag.name, prototypes_tag_path(tag.name), class: "btn btn-default"
   .row.proto-comments
     %h4.col-md-12
       Comments(

@@ -21,7 +21,7 @@ class PrototypesController < ApplicationController
   def create
     @prototype = Prototype.new(prototype_params)
     if @prototype.save
-      redirect_to root_url, notice: 'Prototype successfully created.'
+      redirect_to root_url, notice: 'Prototype created successfully.'
     else
       render :new
     end
@@ -35,7 +35,7 @@ class PrototypesController < ApplicationController
   def update
     @prototype = set_prototype
     if @prototype.update(prototype_params)
-      redirect_to root_url, notice: 'Prototype successfully updated.'
+      redirect_to root_url, notice: 'Prototype updated successfully.'
     else
       render :edit
     end
@@ -44,7 +44,7 @@ class PrototypesController < ApplicationController
   def destroy
     prototype = set_prototype
     prototype.destroy
-    redirect_to root_url, notice: 'Prototype successfully deleted.'
+    redirect_to root_url, notice: 'Prototype deleted  successfully.'
   end
 
   private
@@ -55,6 +55,7 @@ class PrototypesController < ApplicationController
       :catch_copy,
       :concept,
       :captured_image,
+      tag_list: [],
       captured_images_attributes: %i[id content status]
     ).merge(user_id: current_user.id)
   end

@@ -1,0 +1,6 @@
+.col-sm-4.col-sm-3
+  = link_to prototypes_tag_path(tag.name), class: 'btn btn-default tag_size' do
+    .tag_name
+      = tag.name
+    .tag_project
+      = "#{tag.taggings_count} project"

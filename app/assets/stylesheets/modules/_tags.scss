@@ -1,0 +1,34 @@
+.tag {
+  padding-top: 50px;
+  height: 90px;
+
+  &_header {
+    margin-bottom: 30px;
+    height: 40px;
+    color: black;
+    font-size: 30px;
+    font-weight: 200;
+  }
+
+  &_size {
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  &_name {
+    margin: 10px 0;
+    width: 300%;
+    height: 20px;
+    text-align: left;
+    color: black;
+    font-size: 18px;
+    font-weight: 100;
+  }
+
+  &_project {
+    height: 8px;
+    font-size: 10px;
+    text-align: right;
+    color: black;
+  }
+}
