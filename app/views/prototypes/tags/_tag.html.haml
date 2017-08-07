@@ -3,4 +3,4 @@
     .tag_name
       = tag.name
     .tag_project
-      = "#{tag.taggings_count} project"
+      = "#{tag.taggings_count} #{convert_pluralize(tag.taggings_count, 'project')}"

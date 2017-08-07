@@ -1,7 +1,6 @@
-= provide :title, 'Tags'
+= provide :title, 'Tags list'
+= render 'prototypes/index_header'
 .container
   .row
     .tag
-      .tag_header
-        Tags list
       = render partial: 'tag', collection: @tags
