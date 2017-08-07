@@ -22,6 +22,7 @@ gem 'mini_magick'
 gem 'fog'
 gem 'dotenv-rails'
 gem 'kaminari'
+gem 'acts-as-taggable-on'
 
 group :development, :test do
   gem 'byebug', platform: :mri
