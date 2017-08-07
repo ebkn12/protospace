@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   def update
     @user = current_user
     if @user.update(user_params)
-      redirect_to root_url, notice: 'ユーザー情報の更新に成功しました'
+      redirect_to root_url, notice: 'User updated successfully.'
       sign_in(current_user, bypass: true)
     else
       render :edit
@@ -15,7 +15,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @prototypes = @user.prototypes.page(params[:page])
+    @prototypes = @user.related_prototypes(params[:page])
   end
 
   private

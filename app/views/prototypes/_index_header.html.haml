@@ -5,8 +5,8 @@
   .container
     .row
       %ul.nav.nav-pills.col-lg-11
-        %li{role: "presentation", class: "#{'active' if request.path_info.match(/popular/)}"}
-          = link_to "Popular PROTO", prototypes_popular_index_path
         %li{role: "presentation", class: "#{'active' unless request.path_info.match(/popular/)}"}
           = link_to "Newest PROTO", root_url
+        %li{role: "presentation", class: "#{'active' if request.path_info.match(/popular/)}"}
+          = link_to "Popular PROTO", prototypes_popular_index_path
       = button_to "View Tags", prototypes_tags_path, method: :get, class: 'btn btn-default col-lg-1'

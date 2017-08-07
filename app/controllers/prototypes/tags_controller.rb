@@ -4,6 +4,7 @@ class Prototypes::TagsController < ApplicationController
   end
 
   def show
-    @prototypes = Prototype.tagged_with(params[:tag_name])
+    @tag_name = params[:tag_name]
+    @prototypes = Prototype.related_tag(@tag_name, params[:page])
   end
 end
