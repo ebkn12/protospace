@@ -571,36 +571,3 @@ body {
         }
     }
 }
-
-
-/*-- tag --------------------------------------------- */
-
-.tag {
-    padding: 0px;
-    height: 90px;
-    text-decoration: none;
-}
-
-.tag-header {
-    margin: -15px 0 20px 15px;
-    height: 58px;
-    color: #337ab7;
-    font-size: 48px;
-    font-weight: 400;
-}
-
-.tag-name {
-    margin-bottom: 10px;
-    width: 100%;
-    height: 40px;
-    text-align: center;
-    background: #70ADF3;
-    color: white;
-    font-size: 30px;
-    font-weight: 200;
-}
-
-.tag-project {
-    height: 10px;
-    text-align: center;
-}

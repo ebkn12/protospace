@@ -5,6 +5,8 @@ class Prototype < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy
 
+  acts_as_taggable
+
   validates :title, :user_id, presence: true
 
   paginates_per 20

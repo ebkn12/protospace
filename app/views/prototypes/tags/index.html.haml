@@ -1,0 +1,19 @@
+.container
+  .row
+    .tag
+      .tag_header
+        Tags list
+      - @tags.each do |tag|
+        .col-sm-4.col-sm-3
+          = link_to prototypes_tag_path(tag.name), class: 'thumbnail' do
+            .tag_name
+              = tag.name
+            .tag_project
+              = "#{tag.taggings_count} project"
+      - 10.times do |i|
+        .col-sm-4.col-sm-3
+          = link_to "#", class: 'btn btn-default tag_size' do
+            .tag_name
+              = "#{i}-tag"
+            .tag_project
+              = pluralize(i, "project")

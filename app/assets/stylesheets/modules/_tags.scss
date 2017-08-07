@@ -1,32 +1,34 @@
-/*-- tag --------------------------------------------- */
 .tag {
-  padding: 0px;
+  padding-top: 50px;
   height: 90px;
-  text-decoration: none;
-}
 
-.tag-header {
-  margin-bottom: 30px;
-  border-bottom: solid 1px #337ab7;
-  height: 40px;
-  color: white;
-  color: #337ab7;
-  font-size: 30px;
-  font-weight: 400;
-}
+  &_header {
+    margin-bottom: 30px;
+    height: 40px;
+    color: black;
+    font-size: 30px;
+    font-weight: 200;
+  }
 
-.tag-name {
-  margin: 10px 0;
-  width: 100%;
-  height: 40px;
-  text-align: center;
-  background: #70ADF3;
-  color: white;
-  font-size: 30px;
-  font-weight: 200;
-}
+  &_size {
+    width: 100%;
+    margin: 10px 0;
+  }
 
-.tag-project {
-  height: 10px;
-  text-align: center;
+  &_name {
+    margin: 10px 0;
+    width: 300%;
+    height: 20px;
+    text-align: left;
+    color: black;
+    font-size: 20px;
+    font-weight: 100;
+  }
+
+  &_project {
+    height: 8px;
+    font-size: 10px;
+    text-align: right;
+    color: black;
+  }
 }

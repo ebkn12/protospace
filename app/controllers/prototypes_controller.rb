@@ -55,6 +55,7 @@ class PrototypesController < ApplicationController
       :catch_copy,
       :concept,
       :captured_image,
+      :tag_list,
       captured_images_attributes: %i[id content status]
     ).merge(user_id: current_user.id)
   end

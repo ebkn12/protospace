@@ -9,4 +9,4 @@
           = link_to "Popular PROTO", prototypes_popular_index_path
         %li{role: "presentation", class: "#{'active' unless request.path_info.match(/popular/)}"}
           = link_to "Newest PROTO", root_url
-      %button{type: "button", class: "btn btn-default col-lg-1"} View Tags
+      = button_to "View Tags", prototypes_tags_path, method: :get, class: 'btn btn-default col-lg-1'
