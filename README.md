@@ -1,12 +1,14 @@
-# Database
+# Protospace
+Post prototypes.
 
-## User
+# DB
+
+## Users
 |column|type|option|
 |:-:|:-:|:-:|
 |name|string|null: false, unique: true|
-|email||use 'devise'|
-|password||use 'devise'|
-|avatar|text||
+|email, password..etc||use gem 'devise'|
+|avatar|text|use gem 'carrierwave', Amazon S3|
 |profile|text||
 |position|string||
 |occupation|string||
@@ -15,7 +17,7 @@
 - has_many :protypes, :likes, :comments
 
 
-## Prototype
+## Prototypes
 |column|type|option|
 |:-:|:-:|:-:|
 |title|text|null: false|
@@ -27,10 +29,10 @@
 - belons_to :user
 - has_many :captured_images, :likes, :comments
 
-## CapturedImage
+## CapturedImages
 |column|type|option|
 |:-:|:-:|:-:|
-|content|text|null: false|
+|content|text|null: false, use gem 'carrierwave', Amazon S3|
 |status|integer|null: false, default: 0, limit: 1|
 |prototype_id|integer|null: false, foreign_key: true|
 
@@ -38,7 +40,7 @@
 - belons_to :prototype
 
 
-## Like
+## Likes
 |column|type|option|
 |:-:|:-:|:-:|
 |user_id|integer|null: false, foreign_key: true|
@@ -48,7 +50,7 @@
 belongs_to :user, :prototype
 
 
-## Comment
+## Comments
 |column|type|option|
 |:-:|:-:|:-:|
 |content|text|null: false|
@@ -57,3 +59,7 @@ belongs_to :user, :prototype
 
 ### association
 - belongs_to :user, :prototype
+
+
+## Taggingss, Tags
+use gem 'acts-as-taggable-on'
