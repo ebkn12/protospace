@@ -14,7 +14,7 @@
         = f.label :captured_image, 'Main design'
         .cover-image-upload
           = f.fields_for :captured_images, @prototype.main_image do |image|
-            = image.file_field :content
+            = image.file_field :content, class: 'preview_file'
             = image.hidden_field :status, value: 1
       .col-md-12
         = f.label :captured_image, 'Sub design'
@@ -25,11 +25,11 @@
                 - sub_image = @prototype.sub_images[i]
                 .image-upload
                   = f.fields_for :captured_images, sub_image do |image|
-                    = image.file_field :content
+                    = image.file_field :content, class: 'preview_file'
               - else
                 .image-upload
                   = f.fields_for :captured_images, sub_image do |image|
-                    = image.file_field :content
+                    = image.file_field :content, class: 'preview_file'
                 -# .image-upload-plus
                 -#   %span +
     .row.proto-description

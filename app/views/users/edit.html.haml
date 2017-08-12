@@ -15,7 +15,7 @@
             = f.text_field :name, placeholder: 'name', required: true
           .user-image.col-md-2
             %button.btn.btn-primary Add image
-            = f.file_field :avatar
+            = f.file_field :avatar, class: 'preview_file'
         %h4 Email
         = f.email_field :email, autofocus: true, placeholder: 'Email', class: 'user-email', required: true
         %h4 password
