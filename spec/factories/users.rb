@@ -6,9 +6,6 @@ FactoryGirl.define do
     email                 Faker::Internet.email
     password              pass
     password_confirmation pass
-    # avatar                Rack::Test::UploadedFile.new(
-    #   "#{Rails.root}/spec/fixtures/images/avatar.jpg"
-    # )
     avatar                {
       fixture_file_upload("#{Rails.root}/spec/fixtures/images/avatar.jpg", 'image/jpeg')
     }
