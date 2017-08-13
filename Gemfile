@@ -28,7 +28,6 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'rspec-rails'
   gem 'factory_girl_rails'
-  gem 'faker'
   gem 'rails-controller-testing', require: false
 end
 
@@ -46,7 +45,8 @@ group :test do
   gem 'capybara'
   gem 'database_cleaner'
   gem 'launchy'
-  gem 'poltergeist'
+  gem 'faker'
+  gem "selenium-webdriver"
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
