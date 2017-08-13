@@ -8,11 +8,7 @@ describe Like do
           name: Faker::StarWars.character,
           email: Faker::Internet.email
         )
-        other_user = create(:user,
-          name: Faker::StarWars.character,
-          email: Faker::Internet.email
-        )
-        prototype = create(:prototype, user_id: other_user.id)
+        prototype = create(:prototype)
         like = build(:like, user_id: user.id, prototype_id: prototype.id)
         like.valid?
         expect(like).to be_valid

@@ -79,7 +79,33 @@ describe User do
         expect(user.errors[:password]).to include('は6文字以上で入力してください')
       end
     end
+  end
 
+  describe 'associations' do
+    before do
+      @user = create(:user,
+        name: Faker::StarWars.character,
+        email: Faker::Internet.email
+      )
+    end
+
+    it 'delete prototype when related user is deleted' do
+      create(:prototype, user_id: @user.id)
+      expect { @user.destroy }.to change { Prototype.count }.by(-1)
+    end
+
+    it 'delete comment when related user is deleted' do
+      create(:comment, user_id: @user.id)
+      expect { @user.destroy }.to change { Comment.count }.by(-1)
+    end
+
+    it 'delete like when related user is deleted' do
+      create(:like, user_id: @user.id)
+      expect { @user.destroy }.to change { Like.count }.by(-1)
+    end
+  end
+
+  describe '#related_prototypes' do
     it 'returns only related prototypes' do
       user = create(:user, name: 'anakin', email: 'test@test.com')
       other_user = create(:user, name: 'obiwan', email: 'test2@test.com')
