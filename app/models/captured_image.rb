@@ -3,5 +3,5 @@ class CapturedImage < ApplicationRecord
 
   mount_uploader :content, ContentUploader
 
-  validates :content, presence: true
+  validates :content, :status, presence: true
 end
