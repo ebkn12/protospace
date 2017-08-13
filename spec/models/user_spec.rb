@@ -56,5 +56,22 @@ describe User do
       user.valid?
       expect(user.errors[:name]).to include('はすでに存在します')
     end
+
+    it 'is invalid with a duplicate email' do
+      create(:user, email: 'test@test.com')
+      user = build(:user, email: 'test@test.com')
+      user.valid?
+      expect(user.errors[:email]).to include('はすでに存在します')
+    end
+
+    it 'returns only related prototypes' do
+      user = create(:user, name: 'anakin', email: 'test@test.com')
+      other_user = create(:user, name: 'obiwan', email: 'test2@test.com')
+      prototype1 = create(:prototype, user_id: user.id)
+      prototype2 = create(:prototype, user_id: user.id)
+      prototype3 = create(:prototype, user_id: other_user.id)
+      # expect(user.related_prototypes(1)).to eq[prototype2, prototype1]
+      # expect(user.related_prototypes(1)).not_to include(prototype3)
+    end
   end
 end
