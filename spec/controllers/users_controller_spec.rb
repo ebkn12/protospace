@@ -20,9 +20,10 @@ describe UsersController do
     end
 
     describe 'PATCH #update' do
+      let(:sample_name) { Faker::StarWars.character }
       let(:user_params) {{
         id: user.id,
-        user: attributes_for(:user, name: Faker::StarWars.character)
+        user: attributes_for(:user, name: sample_name)
       }}
 
       context 'success to update' do
@@ -32,6 +33,10 @@ describe UsersController do
 
         it 'assigns current_user to @user' do
           expect(assigns(:user)).to eq user
+        end
+
+        it "changes @user's name" do
+          expect(user.name).to eq sample_name
         end
 
         it 'redirect_to root_url' do
@@ -63,16 +68,24 @@ describe UsersController do
     end
 
     describe 'GET #show' do
+      let(:test_user) {
+        create(
+          :user,
+          name: Faker::StarWars.character,
+          email: Faker::Internet.email
+        )
+      }
       before do
-        get :show, id: user.id
+        get :show, id: test_user.id
       end
 
       it 'assigns the requested user to @user' do
-        expect(assigns(:user)).to eq user
+        expect(assigns(:user)).to eq test_user
       end
 
       it 'assigns prototypes related @user to @prototypes' do
-
+        prototype = create(:prototype, user_id: test_user.id)
+        expect(test_user.related_prototypes(1).first).to eq prototype
       end
 
       it 'renders the :edit template' do
@@ -89,10 +102,6 @@ describe UsersController do
         get :edit, id: user.id
         expect(response).to redirect_to new_user_session_path
       end
-
-      it 'displays the flash message' do
-        expect(flash[:alert]).to eq 'ログインまたは登録が必要です'
-      end
     end
 
     describe 'PATCH #update' do
@@ -102,10 +111,6 @@ describe UsersController do
           user: attributes_for(:user, name: Faker::StarWars.character)
         }
         expect(response).to redirect_to new_user_session_path
-      end
-
-      it 'displays the flash message' do
-        expect(flash[:alert]).to eq 'ログインまたは登録が必要です。'
       end
     end
   end

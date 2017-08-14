@@ -21,8 +21,9 @@ class PrototypesController < ApplicationController
   def create
     @prototype = Prototype.new(prototype_params)
     if @prototype.save
-      redirect_to root_url, notice: 'Prototype created successfully.'
+      redirect_to root_url, notice: 'プロトタイプを投稿しました。'
     else
+      flash.now[:warning] = 'プロトタイプの投稿に失敗しました。'
       render :new
     end
   end
@@ -35,8 +36,9 @@ class PrototypesController < ApplicationController
   def update
     @prototype = set_prototype
     if @prototype.update(prototype_params)
-      redirect_to root_url, notice: 'Prototype updated successfully.'
+      redirect_to root_url, notice: 'プロトタイプを更新しました。'
     else
+      flash.now[:warning] = 'プロトタイプの更新に失敗しました。'
       render :edit
     end
   end
@@ -44,7 +46,7 @@ class PrototypesController < ApplicationController
   def destroy
     prototype = set_prototype
     prototype.destroy
-    redirect_to root_url, notice: 'Prototype deleted  successfully.'
+    redirect_to root_url, notice: 'プロトタイプを削除しました。'
   end
 
   private
