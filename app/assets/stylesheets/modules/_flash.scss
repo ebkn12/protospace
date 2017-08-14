@@ -7,6 +7,7 @@
     &-notice {
         background-color: $flash_success;
     }
+    &-alert,
     &-warning,
     &-danger {
         background-color: $flash_error;

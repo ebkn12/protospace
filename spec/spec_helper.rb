@@ -2,13 +2,9 @@ require 'factory_girl_rails'
 require 'database_cleaner'
 require File.expand_path("../../config/environment",__FILE__)
 require 'rspec/rails'
-require 'support/controller_macros'
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
-
-  config.include Devise::TestHelpers, type: :controller
-  config.extend ControllerMacros, type: :controller
 
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true

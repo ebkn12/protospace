@@ -1,9 +1,9 @@
 # Protospace
-Post prototypes.
+プロトタイプを投稿するアプリケーションです
 
-# DB
+***
 
-## Users
+## Users table
 |column|type|option|
 |:-:|:-:|:-:|
 |name|string|null: false, unique: true|
@@ -17,7 +17,7 @@ Post prototypes.
 - has_many :protypes, :likes, :comments
 
 
-## Prototypes
+## Prototypes table
 |column|type|option|
 |:-:|:-:|:-:|
 |title|text|null: false|
@@ -29,7 +29,7 @@ Post prototypes.
 - belons_to :user
 - has_many :captured_images, :likes, :comments
 
-## CapturedImages
+## CapturedImages table
 |column|type|option|
 |:-:|:-:|:-:|
 |content|text|null: false, use gem 'carrierwave', Amazon S3|
@@ -40,7 +40,7 @@ Post prototypes.
 - belons_to :prototype
 
 
-## Likes
+## Likes table
 |column|type|option|
 |:-:|:-:|:-:|
 |user_id|integer|null: false, foreign_key: true|
@@ -50,7 +50,7 @@ Post prototypes.
 belongs_to :user, :prototype
 
 
-## Comments
+## Comments table
 |column|type|option|
 |:-:|:-:|:-:|
 |content|text|null: false|
@@ -61,5 +61,41 @@ belongs_to :user, :prototype
 - belongs_to :user, :prototype
 
 
-## Taggingss, Tags
+## Taggingss, Tags table
 use gem 'acts-as-taggable-on'
+
+# Setup
+git cloneした後、以下のコマンドを実行してください
+```sh
+$ bundle install
+
+$ rails db:create
+
+$ rails db:migrate
+
+$ rails s
+```
+
+画像を投稿するには、Amazon S3にアクセスするキーが必要です。
+
+.env.sampleを参考にして、.envファイルを作成してください
+
+```ruby
+AWS_ACCESS_KEY_ID
+AWS_SECRET_ACCESS_KEY
+AWS_REGION
+AWS_S3_BUCKET
+```
+
+# Set sample data
+ユーザーやプロトタイプのサンプルデータを入れるには、以下のコマンドを実行してください
+```sh
+$ rails db:seed
+```
+(画像のサンプルデータはセットしません)
+
+# Test
+テストを実行するには、以下のコマンドを実行してください
+```sh
+$ rspec
+```

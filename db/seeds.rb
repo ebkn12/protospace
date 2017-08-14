@@ -1,8 +1,35 @@
-100.times do |i|
+5.times do |i|
+  User.create(
+    name:       Faker::StarWars.character,
+    email:      "test_#{i}@test.com",
+    password:   '11111111',
+    avatar:     nil,
+    profile:    Faker::StarWars.quote,
+    occupation: Faker::StarWars.specie,
+    position:   Faker::StarWars.planet
+  )
+end
+
+100.times do
   Prototype.create(
-    title: "TECH::CAMP ver.#{i}",
-    catch_copy: '人生にサプライズを',
-    concept: '理想的な学習環境を提供します',
-    user_id: 2
+    title:      Faker::HarryPotter.book,
+    catch_copy: Faker::HarryPotter.quote,
+    concept:    Faker::HarryPotter.house,
+    user_id:    rand(1..5)
+  )
+end
+
+200.times do
+  Comment.create(
+    content:      Faker::Hobbit.quote,
+    user_id:      rand(1..5),
+    prototype_id: rand(1..100)
+  )
+end
+
+50.times do
+  Like.create(
+    user_id:      rand(1..5),
+    prototype_id: rand(1..100)
   )
 end
