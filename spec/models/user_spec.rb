@@ -82,26 +82,27 @@ describe User do
   end
 
   describe 'associations' do
-    before do
-      @user = create(:user,
+    let(:user) {
+      create(
+        :user,
         name: Faker::StarWars.character,
         email: Faker::Internet.email
       )
-    end
+    }
 
     it 'delete prototype when related user is deleted' do
-      create(:prototype, user_id: @user.id)
-      expect { @user.destroy }.to change { Prototype.count }.by(-1)
+      create(:prototype, user_id: user.id)
+      expect { user.destroy }.to change { Prototype.count }.by(-1)
     end
 
     it 'delete comment when related user is deleted' do
-      create(:comment, user_id: @user.id)
-      expect { @user.destroy }.to change { Comment.count }.by(-1)
+      create(:comment, user_id: user.id)
+      expect { user.destroy }.to change { Comment.count }.by(-1)
     end
 
     it 'delete like when related user is deleted' do
-      create(:like, user_id: @user.id)
-      expect { @user.destroy }.to change { Like.count }.by(-1)
+      create(:like, user_id: user.id)
+      expect { user.destroy }.to change { Like.count }.by(-1)
     end
   end
 
