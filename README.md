@@ -64,6 +64,8 @@ belongs_to :user, :prototype
 ## Taggingss, Tags table
 use gem 'acts-as-taggable-on'
 
+***
+
 # Setup
 git cloneした後、以下のコマンドを実行してください
 ```sh
@@ -76,7 +78,7 @@ $ rails db:migrate
 $ rails s
 ```
 
-画像を投稿するには、Amazon S3にアクセスするキーが必要です。
+画像を投稿するには、Amazon S3にアクセスするキーが必要です。
 
 .env.sampleを参考にして、.envファイルを作成してください
 
