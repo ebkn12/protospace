@@ -2,7 +2,7 @@ class CommentsController < ApplicationController
   def create
     @prototype = Prototype.find(params[:prototype_id])
     @comment = current_user.comments.build(comment_params)
-    flash[:warning] = 'Comment failed.' unless @comment.save
+    flash[:warning] = 'コメントの投稿に失敗しました。' unless @comment.save
   end
 
   private
