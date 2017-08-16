@@ -17,7 +17,7 @@
             %span.degree
               = @user.occupation
     .col-md-6.text-right#like_button
-      = render 'likes/like'
+      = render 'likes/like' if user_signed_in?
   .row
     .col-md-9
       - if @main_image
@@ -54,10 +54,11 @@
       = render @comments
       = paginate @comments
     .col-md-8
-      = form_for [@prototype, @comment], remote: true, html: { class: 'form-inline', role: 'form' } do |f|
-        %h4 Write a comment
-        .row
-          .form-group.col-md-10
-            = f.text_area :content, class: 'form-control comment-input', placeholder: 'Your comments', rows: 3
-          .form-group.col-md-2
-            = f.submit 'Comment', class: 'btn btn-primary'
+      - if user_signed_in?
+        = form_for [@prototype, @comment], remote: true, html: { class: 'form-inline', role: 'form' } do |f|
+          %h4 Write a comment
+          .row
+            .form-group.col-md-10
+              = f.text_area :content, class: 'form-control comment-input', placeholder: 'Your comments', rows: 3
+            .form-group.col-md-2
+              = f.submit 'Comment', class: 'btn btn-primary'
