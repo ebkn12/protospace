@@ -8,7 +8,7 @@ $(document).on('turbolinks:load', function(){
       preview.css('background-image', 'url(' + reader.result + ')');
       preview.css('background-size', 'contain');
       return false;
-    }
+    };
 
     if ($file) {
       reader.readAsDataURL($file);

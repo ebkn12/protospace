@@ -51,12 +51,6 @@ feature 'Prototype', js: true do
     sign_up(user)
     expect(page).to have_selector '.alert-notice', text: 'アカウント登録を受け付けました。'
 
-    click_on user.name
-    click_on 'Logout'
-    click_on 'Get Started'
-    sign_in(user)
-    expect(page).to have_selector '.alert-notice', text: 'ログインしました。'
-
     click_on 'New Proto'
     prototype = build(:prototype, user_id: user.id)
     post_prototype(prototype)
@@ -69,12 +63,6 @@ feature 'Prototype', js: true do
     click_on 'Sign up now'
     sign_up(user)
     expect(page).to have_selector '.alert-notice', text: 'アカウント登録を受け付けました。'
-
-    click_on user.name
-    click_on 'Logout'
-    click_on 'Get Started'
-    sign_in(user)
-    expect(page).to have_selector '.alert-notice', text: 'ログインしました。'
 
     click_on 'New Proto'
     prototype = build(:prototype, user_id: user.id)
@@ -94,12 +82,6 @@ feature 'Prototype', js: true do
     click_on 'Sign up now'
     sign_up(user)
     expect(page).to have_selector '.alert-notice', text: 'アカウント登録を受け付けました。'
-
-    click_on user.name
-    click_on 'Logout'
-    click_on 'Get Started'
-    sign_in(user)
-    expect(page).to have_selector '.alert-notice', text: 'ログインしました。'
 
     click_on 'New Proto'
     prototype = build(:prototype, user_id: user.id)
