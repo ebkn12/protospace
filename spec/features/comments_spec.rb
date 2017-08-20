@@ -16,5 +16,11 @@ feature 'Comment', js: true do
     expect(page).to have_selector '.alert-notice', text: 'プロトタイプを投稿しました。'
 
     page.first('.proto-content .thumbnail a').click
+
+    comment = Faker::StarWars.quote
+    fill_in 'comment[content]', with: comment
+    click_on 'Comment'
+    sleep 2
+    expect(page.first('#post-comment .media .media-body p').text).to eq comment
   end
 end
