@@ -2,6 +2,7 @@ require 'factory_girl_rails'
 require 'database_cleaner'
 require File.expand_path("../../config/environment",__FILE__)
 require 'rspec/rails'
+require './spec/feature_helpers'
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
@@ -27,4 +28,6 @@ RSpec.configure do |config|
   config.after(:each) do
     DatabaseCleaner.clean
   end
+
+  config.include FeatureHelpers
 end
