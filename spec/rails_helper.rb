@@ -3,12 +3,13 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'rspec/rails'
 require 'rails-controller-testing'
 require 'devise'
-require_relative 'support/controller_macros'
 
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
   config.include ActionDispatch::TestProcess
+
+  Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
   FactoryGirl::SyntaxRunner.class_eval do
     include ActionDispatch::TestProcess
@@ -27,4 +28,5 @@ RSpec.configure do |config|
 
   config.include Devise::TestHelpers, type: :controller
   config.extend ControllerMacros, type: :controller
+
 end
