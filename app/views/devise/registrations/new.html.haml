@@ -16,6 +16,8 @@
         = f.email_field :email, autofocus: true, placeholder: 'E-Mail', class: 'user-email', required: true
         %h4 Password
         = f.password_field :password, autocomplete: 'off', placeholder: 'Password', class: 'user-password', required: true
+        %h4 Password confirmation
+        = f.password_field :password_confirmation, autocomplete: 'off', placeholder: 'Password', class: 'user-password', required: true
       .col-md-12
         %h4 Occupation
         .user-user-member.row
@@ -30,4 +32,4 @@
           .user-name.col-md-12
             = f.text_area :profile, cols: 30, rows: 3, placeholder: 'Profile'
         .row.text-center.user-btn
-    = f.submit class: 'btn btn-lg btn-primary btn-block', value: 'Save'
+    = f.submit class: 'btn btn-lg btn-primary btn-block', value: 'Sign up'
