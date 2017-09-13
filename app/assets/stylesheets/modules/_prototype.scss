@@ -235,7 +235,6 @@ body {
             bottom: 0;
             width: 100%;
             opacity: 0;
-            filter: unquote("progrid: DXImageTransform.Microsoft.Alpha(opacity=0)");
             cursor: pointer;
         }
     }
@@ -257,7 +256,6 @@ body {
                 bottom: 0;
                 width: 100%;
                 opacity: 0;
-                filter: unquote("progid: DXImageTransform.Microsoft.Alpha(opacity=0)");
                 cursor: pointer;
             }
         }
