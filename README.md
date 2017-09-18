@@ -1,7 +1,52 @@
 # Protospace
+
 プロトタイプを投稿するアプリケーションです
 
+## 機能
+- ユーザー登録機能
+- コメント機能
+- いいね機能
+- タグ付け機能 
+
+# Setup
+
+```sh
+$ bundle install
+
+$ rails db:create
+
+$ rails db:migrate
+
+$ rails s
+```
+
+画像を投稿するには、Amazon S3にアクセスするキーが必要です。
+
+.env.sampleを参考にして、.envファイルを作成してください
+
+```ruby
+AWS_ACCESS_KEY_ID
+AWS_SECRET_ACCESS_KEY
+AWS_REGION
+AWS_S3_BUCKET
+```
+
+# Set sample data
+ユーザーやプロトタイプのサンプルデータを入れるには、以下のコマンドを実行してください
+```sh
+$ rails db:seed
+```
+(画像のサンプルデータはセットしません)
+
+# Test
+テストを実行するには、以下のコマンドを実行してください
+```sh
+$ rspec
+```
+
 ***
+
+# DB
 
 ## Users table
 |column|type|option|
@@ -63,41 +108,3 @@ belongs_to :user, :prototype
 
 ## Taggingss, Tags table
 use gem 'acts-as-taggable-on'
-
-***
-
-# Setup
-git cloneした後、以下のコマンドを実行してください
-```sh
-$ bundle install
-
-$ rails db:create
-
-$ rails db:migrate
-
-$ rails s
-```
-
-画像を投稿するには、Amazon S3にアクセスするキーが必要です。
-
-.env.sampleを参考にして、.envファイルを作成してください
-
-```ruby
-AWS_ACCESS_KEY_ID
-AWS_SECRET_ACCESS_KEY
-AWS_REGION
-AWS_S3_BUCKET
-```
-
-# Set sample data
-ユーザーやプロトタイプのサンプルデータを入れるには、以下のコマンドを実行してください
-```sh
-$ rails db:seed
-```
-(画像のサンプルデータはセットしません)
-
-# Test
-テストを実行するには、以下のコマンドを実行してください
-```sh
-$ rspec
-```
