@@ -22,6 +22,9 @@
 # Ignore public/uploads files for test images
 /public/uploads/*
 
+# Ignore gems
+/vendor/bundle
+
 # Ignore settings file for rubymine, vscode
 /.idea
 /.vscode
