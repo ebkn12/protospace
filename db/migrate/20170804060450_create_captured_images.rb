@@ -1,4 +1,4 @@
-class CreateCapturedImages < ActiveRecord::Migration[5.0]
+class CreateCapturedImages < ActiveRecord::Migration[5.1]
   def change
     create_table :captured_images do |t|
       t.text :content, null: false
