@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :prototype do
     title       Faker::HarryPotter.book
     catch_copy  Faker::HarryPotter.quote
