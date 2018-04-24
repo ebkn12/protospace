@@ -22,6 +22,7 @@ gem 'fog'
 gem 'dotenv-rails'
 gem 'kaminari'
 gem 'acts-as-taggable-on'
+gem 'bootsnap'
 
 group :development, :test do
   gem 'byebug', platform: :mri
