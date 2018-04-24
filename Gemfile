@@ -5,14 +5,14 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'rails', '~> 5.1.6'
-gem 'mysql2', '>= 0.3.18', '< 0.5'
-gem 'puma', '~> 3.0'
-gem 'sass-rails', '~> 5.0'
-gem 'uglifier', '>= 1.3.0'
+gem 'rails', '5.2.0'
+gem 'mysql2'
+gem 'puma'
+gem 'sass-rails'
+gem 'uglifier'
 gem 'jquery-rails'
-gem 'turbolinks', '~> 5'
-gem 'jbuilder', '~> 2.5'
+gem 'turbolinks'
+gem 'jbuilder'
 gem 'haml-rails'
 gem 'bootstrap-sass'
 gem 'devise'
