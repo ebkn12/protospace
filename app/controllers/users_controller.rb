@@ -18,7 +18,9 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @prototypes = @user.related_prototypes(params[:page])
+    @prototypes = @user.prototypes
+                       .includes(:captured_images, :tag_taggings, :tags)
+                       .order(created_at: :desc).page(params[:page])
   end
 
   private

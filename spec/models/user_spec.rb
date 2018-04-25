@@ -1,120 +1,99 @@
 require 'rails_helper'
 
-describe User do
-  describe '#create' do
-    context 'with valid attributes' do
-      it 'is valid with a name, email, password, avatar, profile, position, occupation' do
-        user = build(:user)
-        user.valid?
-        expect(user).to be_valid
-      end
+describe User, type: :model do
+  describe 'validation' do
+    let(:name) { 'testname' }
+    let(:email) { 'test@test.com' }
+    let(:password) { 'password' }
+    let(:password_confirmation) { password }
+    let(:avatar) { fixture_file_upload(Rails.root.join('spec', 'fixtures', 'images', 'avatar.jpg'), 'image/jpeg') }
+    let(:profile) { 'テストプロフィール' }
+    let(:position) { 'テスト職種' }
+    let(:occupation) { 'テスト職業' }
+    let(:user) { build(:user, name: name, email: email, password: password, password_confirmation: password_confirmation, avatar: avatar, profile: profile, position: position, occupation: occupation) }
+    before { user.valid? }
 
-      it 'is valid without an avatar' do
-        user = build(:user, avatar: nil)
-        user.valid?
-        expect(user).to be_valid
+    context 'when valid' do
+      it { expect(user).to be_valid }
+      context 'when avatar is nil' do
+        let(:avatar) { nil }
+        it { expect(user).to be_valid }
       end
-
-      it 'is valid without a profile' do
-        user = build(:user, profile: nil)
-        user.valid?
-        expect(user).to be_valid
+      context 'when profile is nil' do
+        let(:profile) { nil }
+        it { expect(user).to be_valid }
       end
-
-      it 'is valid without a position' do
-        user = build(:user, position: nil)
-        user.valid?
-        expect(user).to be_valid
+      context 'when position is nil' do
+        let(:position) { nil }
+        it { expect(user).to be_valid }
       end
-
-      it 'is valid without an occupation' do
-        user = build(:user, occupation: nil)
-        user.valid?
-        expect(user).to be_valid
+      context 'when occupation is nil' do
+        let(:occupation) { nil }
+        it { expect(user).to be_valid }
       end
     end
-
-    context 'with invalid attributes' do
-      it 'is invalid without a name' do
-        user = build(:user, name: nil)
-        user.valid?
-        expect(user.errors[:name]).to include('を入力してください')
+    context 'with invalid' do
+      context 'when name is nil' do
+        let(:name) { nil }
+        it { expect(user).not_to be_valid }
+        it { expect(user.errors[:name]).to include('を入力してください') }
       end
-
-      it 'is invalid without a email' do
-        user = build(:user, email: nil)
-        user.valid?
-        expect(user.errors[:email]).to include('を入力してください')
+      context 'when email is nil' do
+        let(:email) { nil }
+        it { expect(user).not_to be_valid }
+        it { expect(user.errors[:email]).to include('を入力してください') }
       end
-
-      it 'is invalid without a password' do
-        user = build(:user, password: nil)
-        user.valid?
-        expect(user.errors[:password]).to include('を入力してください')
+      context 'when password is nil' do
+        let(:password) { nil }
+        it { expect(user).not_to be_valid }
+        it { expect(user.errors[:password]).to include('を入力してください') }
       end
-
-      it 'is invalid without a password_confirmation although with a password' do
-        user = build(:user, password_confirmation: '')
-        user.valid?
-        expect(user.errors[:password_confirmation]).to include('とPasswordの入力が一致しません')
+      context 'when password length is less than 6 chars' do
+        let(:password) { 'a' * 5 }
+        it { expect(user).not_to be_valid }
+        it { expect(user.errors[:password]).to include('は6文字以上で入力してください') }
       end
-
-      it 'is invalid with a duplicate name' do
-        create(:user, name: 'Jyn Erso')
-        user = build(:user, name: 'Jyn Erso')
-        user.valid?
-        expect(user.errors[:name]).to include('はすでに存在します')
+      context 'when password and password_confirmation are different' do
+        let(:password_confirmation) { 'wrong_password' }
+        it { expect(user).not_to be_valid }
+        it { expect(user.errors[:password_confirmation]).to include('とPasswordの入力が一致しません') }
       end
-
-      it 'is invalid with a duplicate email' do
-        create(:user, email: 'test@test.com')
-        user = build(:user, email: 'test@test.com')
-        user.valid?
-        expect(user.errors[:email]).to include('はすでに存在します')
+      context 'when duplicate name' do
+        before do
+          create(:user, name: name, email: 'other@test.com')
+          user.valid?
+        end
+        it { expect(user).not_to be_valid }
+        it { expect(user.errors[:name]).to include('はすでに存在します') }
       end
-
-      it 'is invalid with a password that has less than 5 characters' do
-        user = build(:user, password: 'vador', password_confirmation: 'vador')
-        user.valid?
-        expect(user.errors[:password]).to include('は6文字以上で入力してください')
+      context 'when duplicate email' do
+        before do
+          create(:user, name: 'other_name', email: email)
+          user.valid?
+        end
+        it { expect(user).not_to be_valid }
+        it { expect(user.errors[:email]).to include('はすでに存在します') }
       end
     end
   end
 
-  describe 'associations' do
-    let(:user) {
-      create(
-        :user,
-        name: Faker::StarWars.character,
-        email: Faker::Internet.email
-      )
-    }
+  describe 'dependent: :destroy option' do
+    let!(:user) { create(:user) }
 
-    it 'delete prototype when related user is deleted' do
-      create(:prototype, user_id: user.id)
-      expect { user.destroy }.to change { Prototype.count }.by(-1)
-    end
-
-    it 'delete comment when related user is deleted' do
-      create(:comment, user_id: user.id)
-      expect { user.destroy }.to change { Comment.count }.by(-1)
-    end
-
-    it 'delete like when related user is deleted' do
-      create(:like, user_id: user.id)
-      expect { user.destroy }.to change { Like.count }.by(-1)
-    end
-  end
-
-  describe '#related_prototypes' do
-    it 'returns only related prototypes' do
-      user = create(:user, name: 'anakin', email: 'test@test.com')
-      other_user = create(:user, name: 'obiwan', email: 'test2@test.com')
-      prototype1 = create(:prototype, user_id: user.id)
-      prototype2 = create(:prototype, user_id: user.id)
-      prototype3 = create(:prototype, user_id: other_user.id)
-      # expect(user.related_prototypes(1)).to eq[prototype2, prototype1]
-      # expect(user.related_prototypes(1)).not_to include(prototype3)
+    context 'when user deleted' do
+      let!(:prototype) { create(:prototype, user: user) }
+      context 'with prototype' do
+        it { expect { user.destroy }.to change { Prototype.count }.by(-1) }
+      end
+      context 'with like' do
+        let(:other_user) { create(:user, name: 'other_name', email: 'other@test.com') }
+        before { create(:like, user: other_user, prototype: prototype) }
+        it { expect { user.destroy }.to change { Like.count }.by(-1) }
+      end
+      context 'with comment' do
+        before { create(:comment, user: user, prototype: prototype) }
+        it { expect { user.destroy }.to change { Comment.count }.by(-1) }
+      end
     end
   end
 end
