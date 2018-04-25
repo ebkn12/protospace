@@ -1,12 +1,12 @@
 class PrototypesController < ApplicationController
   before_action :authenticate_user!, only: %i[new create edit update destroy]
+  before_action :set_prototype, only: %i[show edit update destroy]
 
   def index
     @prototypes = Prototype.order_by_newest(params[:page])
   end
 
   def show
-    @prototype = set_prototype
     @user = @prototype.user
     @main_image, @sub_images = images_src(@prototype)
     @comment = Comment.new
@@ -29,12 +29,10 @@ class PrototypesController < ApplicationController
   end
 
   def edit
-    @prototype = set_prototype
     @main_image, @sub_images = images_src(@prototype)
   end
 
   def update
-    @prototype = set_prototype
     if @prototype.update(prototype_params)
       redirect_to root_url, notice: 'プロトタイプを更新しました。'
     else
@@ -44,8 +42,7 @@ class PrototypesController < ApplicationController
   end
 
   def destroy
-    prototype = set_prototype
-    prototype.destroy
+    @prototype.destroy
     redirect_to root_url, notice: 'プロトタイプを削除しました。'
   end
 
@@ -63,7 +60,7 @@ class PrototypesController < ApplicationController
   end
 
   def set_prototype
-    Prototype.find(params[:id])
+    @prototype = Prototype.find(params[:id])
   end
 
   def images_src(prototype)
