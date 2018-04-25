@@ -15,6 +15,7 @@ AllCops:
     - 'Rakefile'
     - 'spec/spec_helper.rb'
     - 'spec/rails_helper.rb'
+    - 'spec/feature_helpers.rb'
 
 # use rails rubocop
 Rails:
