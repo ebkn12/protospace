@@ -7,51 +7,28 @@ class Prototype < ApplicationRecord
 
   acts_as_taggable
 
-  validates :title, :user_id, presence: true
+  validates :title, presence: true
 
   paginates_per 20
 
   scope :order_by_newest, lambda { |page|
-    includes(
-      :user,
-      :captured_images,
-      :tag_taggings,
-      :tags
-    )
-      .order('created_at desc')
-      .page(page)
+    includes(:user, :captured_images, :tag_taggings, :tags)
+      .order('created_at desc').page(page)
   }
-
   scope :order_by_popular, lambda { |page|
-    includes(
-      :user,
-      :captured_images,
-      :tag_taggings,
-      :tags
-    )
+    includes(:user, :captured_images, :tag_taggings, :tags)
       .joins(:likes)
-      .order('likes_count desc')
-      .order('created_at desc')
-      .page(page)
+      .order(likes_count: :desc).order(created_at: :desc).page(page)
   }
-
   scope :related_tag, lambda { |tag_name, page|
     tagged_with(tag_name)
-      .includes(
-        :user,
-        :captured_images,
-        :tag_taggings,
-        :tags
-      )
-      .order('created_at desc')
-      .page(page)
+      .includes(:user, :captured_images, :tag_taggings, :tags)
+      .order('created_at desc').page(page)
   }
 
   def related_comments(page)
-    comments
-      .includes(:user)
-      .page(page)
-      .order('created_at desc')
+    comments.includes(:user)
+            .order(created_at: :desc).page(page)
   end
 
   def main_image
