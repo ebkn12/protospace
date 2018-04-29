@@ -18,9 +18,9 @@ describe UsersController, type: :controller do
       let(:new_position) { '新しい職種' }
       let(:new_occupation) { '新しい職業' }
       let(:params) do
-        { params: { user: { name: new_name, email: new_email, profile: new_profile, position: new_position, occupation: new_occupation } } }
+        { user: { name: new_name, email: new_email, profile: new_profile, position: new_position, occupation: new_occupation } }
       end
-      before { patch :update, params }
+      before { patch :update, params: params }
 
       context 'when valid attributes' do
         shared_examples_for 'user_successfully_updated' do

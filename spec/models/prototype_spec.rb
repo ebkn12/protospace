@@ -30,12 +30,12 @@ describe Prototype, type: :model do
       context 'when user is nil' do
         let(:user) { nil }
         it { expect(prototype).not_to be_valid }
-        it { expect(prototype.errors[:user]).to include('を入力してください')}
+        it { expect(prototype.errors[:user]).to include('を入力してください') }
       end
       context 'when specified user is invalid' do
         let(:prototype) { build(:prototype, user_id: 10, title: title, catch_copy: catch_copy, concept: concept) }
         it { expect(prototype).not_to be_valid }
-        it { expect(prototype.errors[:user]).to include('を入力してください')}
+        it { expect(prototype.errors[:user]).to include('を入力してください') }
       end
     end
   end

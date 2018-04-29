@@ -35,9 +35,9 @@ describe PrototypesController, type: :controller do
       let(:catch_copy) { '新しいキャッチコピー' }
       let(:concept) { '新しいコンセプト' }
       let(:params) do
-        { params: { prototype: { user: current_user, title: title, catch_copy: catch_copy, concept: concept } } }
+        { prototype: { user: current_user, title: title, catch_copy: catch_copy, concept: concept } }
       end
-      before { post :create, params }
+      before { post :create, params: params }
 
       context 'when successfully created' do
         shared_examples_for 'successfully_created' do
@@ -81,9 +81,9 @@ describe PrototypesController, type: :controller do
       let(:new_catch_copy) { '新しいキャッチコピー' }
       let(:new_concept) { '新しいコンセプト' }
       let(:params) do
-        { params: { id: prototype.id, prototype: { user: current_user, title: new_title, catch_copy: new_catch_copy, concept: new_concept } } }
+        { id: prototype.id, prototype: { user: current_user, title: new_title, catch_copy: new_catch_copy, concept: new_concept } }
       end
-      before { patch :update, params }
+      before { patch :update, params: params }
 
       context 'when successfully updated' do
         shared_examples_for 'successfully_updated' do
@@ -136,12 +136,12 @@ describe PrototypesController, type: :controller do
     end
     describe 'POST #create' do
       before { post :create }
-      it {expect(response).to redirect_to new_user_session_path }
+      it { expect(response).to redirect_to new_user_session_path }
     end
     describe 'GET #edit' do
       let!(:other_user) { create(:user, name: 'other_user', email: 'other@test.com') }
       let!(:prototype) { create(:prototype, user: other_user) }
-      before{ get :edit, params: { id: prototype.id } }
+      before { get :edit, params: { id: prototype.id } }
       it { expect(response).to redirect_to new_user_session_path }
     end
     describe 'PATCH #update' do
