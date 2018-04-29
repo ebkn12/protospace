@@ -1,6 +1,8 @@
 require 'factory_bot_rails'
 require File.expand_path("../../config/environment",__FILE__)
 require 'rspec/rails'
+require 'capybara/rspec'
+require 'selenium-webdriver'
 
 RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
@@ -13,8 +15,12 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
-  config.before(:each, type: :system) do
-    driven_by :selenium_chrome_headless
+  config.before(:each, type: :system) do |example|
+    if example.metadata[:js]
+      driven_by :selenium_chrome_headless, screen_size: [1400, 1400]
+    else
+      driven_by :rack_test
+    end
   end
 
   config.shared_context_metadata_behavior = :apply_to_host_groups

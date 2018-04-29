@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'User' do
+describe 'users', type: :system do
   let!(:user) { create(:user) }
   let(:new_user) { build(:user) }
   let(:new_name) { 'new_name' }
@@ -37,7 +37,7 @@ describe 'User' do
     expect(page).to have_content(new_user.name)
     expect(page).to have_selector('.alert-notice', text: 'アカウント登録を受け付けました。')
   end
-  it 'completes to edit user' do
+  it 'completes to edit user', js: true do
     login
     click_on user.name
     click_on 'Edit profile'
@@ -53,7 +53,7 @@ describe 'User' do
 
     expect(page).to have_selector('.alert-notice', text: 'ユーザー情報を更新しました。')
   end
-  it 'completes to log out' do
+  it 'completes to log out', js: true do
     login
     click_on user.name
     click_on 'Logout'

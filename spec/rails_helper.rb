@@ -1,7 +1,7 @@
 require 'spec_helper'
 abort("The Rails environment is running in production mode!") if Rails.env.production?
-require 'rspec/rails'
 require 'rails-controller-testing'
+
 require 'devise'
 
 ActiveRecord::Migration.maintain_test_schema!
@@ -28,5 +28,4 @@ RSpec.configure do |config|
 
   config.include Devise::TestHelpers, type: :controller
   config.extend ControllerMacros, type: :controller
-
 end
