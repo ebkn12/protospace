@@ -1,8 +1,8 @@
-require 'factory_girl_rails'
-require 'database_cleaner'
+require 'factory_bot_rails'
 require File.expand_path("../../config/environment",__FILE__)
 require 'rspec/rails'
-require './spec/feature_helpers'
+require 'capybara/rspec'
+require 'selenium-webdriver'
 
 RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
@@ -15,19 +15,13 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
+  config.before(:each, type: :system) do |example|
+    if example.metadata[:js]
+      driven_by :selenium_chrome_headless, screen_size: [1400, 1400]
+    else
+      driven_by :rack_test
+    end
+  end
+
   config.shared_context_metadata_behavior = :apply_to_host_groups
-
-  config.before(:suite) do
-    DatabaseCleaner.strategy = :truncation
-  end
-
-  config.before(:each) do
-    DatabaseCleaner.start
-  end
-
-  config.after(:each) do
-    DatabaseCleaner.clean
-  end
-
-  config.include FeatureHelpers
 end

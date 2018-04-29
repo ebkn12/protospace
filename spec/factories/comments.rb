@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :comment do
-    content Faker::Hobbit.quote
+    content 'テストコメント'
     user
     prototype
   end

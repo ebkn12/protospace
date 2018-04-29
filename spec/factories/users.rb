@@ -1,16 +1,14 @@
 FactoryBot.define do
-  pass = Faker::Internet.password(8)
-
   factory :user do
-    name                  Faker::StarWars.character
-    email                 Faker::Internet.email
-    password              pass
-    password_confirmation pass
-    avatar                {
-      fixture_file_upload("#{Rails.root}/spec/fixtures/images/avatar.jpg", 'image/jpeg')
-    }
-    profile               Faker::StarWars.quote
-    position              Faker::StarWars.planet
-    occupation            Faker::StarWars.specie
+    sequence(:name)       { |n| "testuser#{n}" }
+    sequence(:email)      { |n| "test_#{n}@test.com" }
+    password              'password'
+    password_confirmation 'password'
+    avatar do
+      fixture_file_upload(Rails.root.join('spec', 'fixtures', 'images', 'avatar.jpg'), 'image/jpeg')
+    end
+    profile               'テストプロフィール'
+    occupation            'テスト職業'
+    position              'テスト役職'
   end
 end

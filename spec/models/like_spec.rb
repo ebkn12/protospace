@@ -1,32 +1,24 @@
 require 'rails_helper'
 
-describe Like do
-  describe '#create' do
-    context 'with valid attributes' do
-      it 'is valid with user_id and prototype_id' do
-        user = create(:user,
-          name: Faker::StarWars.character,
-          email: Faker::Internet.email
-        )
-        prototype = create(:prototype)
-        like = build(:like, user_id: user.id, prototype_id: prototype.id)
-        like.valid?
-        expect(like).to be_valid
-      end
+describe Like, type: :model do
+  let!(:user) { create(:user) }
+  let!(:other_user) { create(:user, name: 'other_user', email: 'other@test.com') }
+  let!(:prototype) { create(:prototype, user: other_user) }
+  let(:like) { build(:like, user: user, prototype: prototype) }
+
+  context 'when valid' do
+    before { like.valid? }
+    it { expect(like).to be_valid }
+  end
+  context 'when invalid' do
+    before { like.valid? }
+    context 'when user is nil' do
+      let(:user) { nil }
+      it { expect(like).not_to be_valid }
     end
-
-    context 'with invalid attributes' do
-      it 'is invalid without user_id' do
-        like = build(:like, user_id: nil)
-        like.valid?
-        expect(like.errors[:user_id]).to include('を入力してください')
-      end
-
-      it 'is invalid without prototype_id' do
-        like = build(:like, prototype_id: nil)
-        like.valid?
-        expect(like.errors[:prototype_id]).to include('を入力してください')
-      end
+    context 'when prototype is nil' do
+      let(:prototype) { nil }
+      it { expect(like).not_to be_valid }
     end
   end
 end

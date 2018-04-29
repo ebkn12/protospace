@@ -1,35 +1,54 @@
-5.times do |i|
-  User.create(
-    name:       Faker::StarWars.character,
-    email:      "test_#{i}@test.com",
-    password:   '11111111',
-    avatar:     nil,
-    profile:    Faker::StarWars.quote,
-    occupation: Faker::StarWars.specie,
-    position:   Faker::StarWars.planet
-  )
-end
+if Rails.env == "development"
+  ApplicationRecord.transaction do
+    puts 'Creating ebkn12...'
+    User.create(
+      name: 'ebkn12',
+      email: 'test@test.com',
+      password: 'password',
+      avatar: nil,
+      profile: 'エンジニア見習いです',
+      occupation: '学生',
+      position: 'B3'
+    )
 
-100.times do
-  Prototype.create(
-    title:      Faker::HarryPotter.book,
-    catch_copy: Faker::HarryPotter.quote,
-    concept:    Faker::HarryPotter.house,
-    user_id:    rand(1..5)
-  )
-end
+    puts 'Creating users...'
+    1.upto(10) do |n|
+      User.create(
+        name: "testuser_#{n}",
+        email: "test_#{n}@test.com",
+        password: 'password',
+        avatar: nil,
+        profile: 'プロフィール',
+        occupation: '学生',
+        position: 'B3'
+      )
+    end
 
-200.times do
-  Comment.create(
-    content:      Faker::Hobbit.quote,
-    user_id:      rand(1..5),
-    prototype_id: rand(1..100)
-  )
-end
-
-50.times do
-  Like.create(
-    user_id:      rand(1..5),
-    prototype_id: rand(1..100)
-  )
+    puts 'Creating prototypes...'
+    users = User.all
+    users.each do |user|
+      other_users = users.where.not(id: user.id)
+      1.upto(10) do |n|
+        p = Prototype.create(
+          title: "プロトタイプサンプル No.#{n}",
+          catch_copy: "キャッチコピー_#{n}",
+          concept: "コンセプト_#{n}",
+          user: user
+        )
+        rand(15).times do
+          Comment.create(
+            content: 'コメント',
+            user: other_users.sample,
+            prototype: p
+          )
+        end
+        other_users.sample(rand(other_users.size)).each do |likable_user|
+          Like.create(
+            user: likable_user,
+            prototype: p
+          )
+        end
+      end
+    end
+  end
 end

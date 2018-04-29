@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
+  resource :users, only: %i[edit update] do
+    get :mypage
+  end
   devise_for :users
-  resources  :users, only: %i[edit update show]
+  resources :users, only: :show
 
   namespace :prototypes do
     resources :popular, only: :index
@@ -8,10 +11,8 @@ Rails.application.routes.draw do
   end
   resources :prototypes do
     resources :comments, only: :create
+    resource :likes, only: %i[create destroy], as: :like
   end
-
-  post   '/:prototype_id/like'   => 'likes#like',   as: :like
-  delete '/:prototype_id/unlike' => 'likes#unlike', as: :unlike
 
   root 'prototypes#index'
 end

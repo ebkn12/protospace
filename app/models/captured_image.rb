@@ -1,5 +1,5 @@
 class CapturedImage < ApplicationRecord
-  belongs_to :prototype, optional: true
+  belongs_to :prototype
 
   mount_uploader :content, ContentUploader
 

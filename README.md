@@ -2,26 +2,22 @@
 
 プロトタイプを投稿するアプリケーションです
 
-## 機能
-- ユーザー登録機能
-- コメント機能
-- いいね機能
-- タグ付け機能 
+#### dependencies
+- ruby 2.5.1
+- rails 5.2.0
+- mysql
 
 # Setup
 
 ```sh
 $ bundle install
 
-$ rails db:create
-
-$ rails db:migrate
+$ rails db:setup
 
 $ rails s
 ```
 
 画像を投稿するには、Amazon S3にアクセスするキーが必要です。
-
 .env.sampleを参考にして、.envファイルを作成してください
 
 ```ruby
@@ -43,68 +39,3 @@ $ rails db:seed
 ```sh
 $ rspec
 ```
-
-***
-
-# DB
-
-## Users table
-|column|type|option|
-|:-:|:-:|:-:|
-|name|string|null: false, unique: true|
-|email, password..etc||use gem 'devise'|
-|avatar|text|use gem 'carrierwave', Amazon S3|
-|profile|text||
-|position|string||
-|occupation|string||
-
-### association
-- has_many :protypes, :likes, :comments
-
-
-## Prototypes table
-|column|type|option|
-|:-:|:-:|:-:|
-|title|text|null: false|
-|catch_copy|text||
-|concept|text||
-|user_id|integer|null: false, foreign_key: true|
-
-### association
-- belons_to :user
-- has_many :captured_images, :likes, :comments
-
-## CapturedImages table
-|column|type|option|
-|:-:|:-:|:-:|
-|content|text|null: false, use gem 'carrierwave', Amazon S3|
-|status|integer|null: false, default: 0, limit: 1|
-|prototype_id|integer|null: false, foreign_key: true|
-
-### association
-- belons_to :prototype
-
-
-## Likes table
-|column|type|option|
-|:-:|:-:|:-:|
-|user_id|integer|null: false, foreign_key: true|
-|prototype_id|integer|null: false, foreignkey: true|
-
-### association
-belongs_to :user, :prototype
-
-
-## Comments table
-|column|type|option|
-|:-:|:-:|:-:|
-|content|text|null: false|
-|user_id|integer|foreign_key: true, null: false|
-|prototype_id|integer|foreign_key: true, null: false|
-
-### association
-- belongs_to :user, :prototype
-
-
-## Taggingss, Tags table
-use gem 'acts-as-taggable-on'

@@ -1,42 +1,42 @@
 require 'rails_helper'
 
-describe Comment do
-  describe '#create' do
-    let(:user) {
-      create(
-        :user,
-        name: Faker::StarWars.character,
-        email: Faker::Internet.email
-      )
-    }
-    let(:prototype) { create(:prototype) }
+describe Comment, type: :model do
+  let!(:user) { create(:user) }
+  let!(:posting_user) { create(:user, name: '投稿者', email: 'post@test.com') }
+  let!(:prototype) { create(:prototype, user: posting_user) }
+  let(:content) { 'テストコメント' }
+  let(:comment) { build(:comment, user: user, prototype: prototype, content: content) }
 
-    context 'with valid attributes' do
-      it 'is valid with a content, user_id, prototype_id' do
-        comment = build(:comment, user_id: user.id, prototype_id: prototype.id)
-        comment.valid?
-        expect(comment).to be_valid
-      end
+  context 'when valid' do
+    before { comment.valid? }
+    it { expect(comment).to be_valid }
+  end
+  context 'when invalid' do
+    before { comment.valid? }
+    context 'when content is nil' do
+      let(:content) { nil }
+      it { expect(comment).not_to be_valid }
+      it { expect(comment.errors[:content]).to include('を入力してください') }
     end
-
-    context 'with invalid attributes' do
-      it 'is invalid without a content' do
-        comment = build(:comment, content: nil, user_id: user.id, prototype_id: prototype.id)
-        comment.valid?
-        expect(comment.errors[:content]).to include('を入力してください')
-      end
-
-      it 'is invalid without an user_id' do
-        comment = build(:comment, user_id: nil, prototype_id: prototype.id)
-        comment.valid?
-        expect(comment.errors[:user_id]).to include('を入力してください')
-      end
-
-      it 'is invalid without a prototype_id' do
-        comment = build(:comment, user_id: user.id, prototype_id: nil)
-        comment.valid?
-        expect(comment.errors[:prototype_id]).to include('を入力してください')
-      end
+    context 'when user is nil' do
+      let(:user) { nil }
+      it { expect(comment).not_to be_valid }
+      it { expect(comment.errors[:user]).to include('を入力してください') }
+    end
+    context 'when specified user is not exist' do
+      let(:comment) { build(:comment, user_id: 100, prototype: prototype, content: content) }
+      it { expect(comment).not_to be_valid }
+      it { expect(comment.errors[:user]).to include('を入力してください') }
+    end
+    context 'when prototype is nil' do
+      let(:prototype) { nil }
+      it { expect(comment).not_to be_valid }
+      it { expect(comment.errors[:prototype]).to include('を入力してください') }
+    end
+    context 'when specified prototype is not exist' do
+      let(:comment) { build(:comment, user: user, prototype_id: 100, content: content) }
+      it { expect(comment).not_to be_valid }
+      it { expect(comment.errors[:prototype]).to include('を入力してください') }
     end
   end
 end

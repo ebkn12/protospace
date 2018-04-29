@@ -1,14 +1,13 @@
 class LikesController < ApplicationController
-  before_action :authenticate_user!, only: %i[like unlike]
+  before_action :authenticate_user!, only: %i[create destroy]
+  before_action :set_prototype, only: %i[create destroy]
 
-  def like
-    @prototype = set_prototype
+  def create
     like = current_user.likes.build(prototype_id: @prototype.id)
     flash[:warning] = '失敗しました。' unless like.save
   end
 
-  def unlike
-    @prototype = set_prototype
+  def destroy
     like = current_user.likes.find_by(prototype_id: @prototype.id)
     flash[:warning] = '失敗しました。' unless like.destroy
   end
@@ -16,6 +15,6 @@ class LikesController < ApplicationController
   private
 
   def set_prototype
-    Prototype.find(params[:prototype_id])
+    @prototype = Prototype.find(params[:prototype_id])
   end
 end
