@@ -26,7 +26,7 @@ describe 'likes', type: :system do
     click_on 'Like'
     sleep 1
 
-    icon_source = page.find('#like_button form button img')[:src]
+    # icon_source = page.find('#like_button form button img')[:src]
     # TODO
     # expect(icon_source.include?('icon_heart')).to be_truthy
     # expect(icon_source.include?('icon_heart_red')).to be_falsey
