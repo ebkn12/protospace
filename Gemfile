@@ -28,7 +28,6 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'rspec-rails'
   gem 'factory_bot_rails'
-  gem 'faker'
   gem 'rails-controller-testing', require: false
   gem 'rubocop', require: false
   gem 'pry-rails'
@@ -44,9 +43,8 @@ end
 
 group :test do
   gem 'capybara'
-  gem 'database_cleaner'
-  gem 'launchy'
   gem 'selenium-webdriver'
+  gem 'chromedriver-helper'
 end
 
 group :production do
