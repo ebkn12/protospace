@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  devise_for :users
   resource :users, only: %i[edit update]
+  devise_for :users
   resources :users, only: :show
 
   namespace :prototypes do

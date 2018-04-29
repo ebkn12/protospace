@@ -1,7 +1,6 @@
 require 'factory_bot_rails'
 require File.expand_path("../../config/environment",__FILE__)
 require 'rspec/rails'
-require './spec/feature_helpers'
 
 RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
@@ -14,7 +13,9 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
-  config.shared_context_metadata_behavior = :apply_to_host_groups
+  config.before(:each, type: :system) do
+    driven_by :selenium_chrome_headless
+  end
 
-  config.include FeatureHelpers
+  config.shared_context_metadata_behavior = :apply_to_host_groups
 end

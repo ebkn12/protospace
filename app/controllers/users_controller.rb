@@ -30,6 +30,7 @@ class UsersController < ApplicationController
       :name,
       :email,
       :password,
+      :password_confirmation,
       :avatar,
       :occupation,
       :profile,

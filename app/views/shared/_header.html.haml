@@ -17,7 +17,7 @@
               %li
                 = link_to 'My Page', current_user
               %li
-                = link_to 'Edit profile', edit_user_path(current_user)
+                = link_to 'Edit profile', edit_users_path
               %li
                 = link_to 'Logout', destroy_user_session_path, method: :delete
         - else

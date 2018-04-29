@@ -4,7 +4,7 @@
     = "#{@user.errors.count}件のエラーがあります"
   - @user.errors.full_messages.each do |error|
     = content_tag :div, error, class: 'alert alert-warning'
-= form_for @user, html: { class: 'container user-new' } do |f|
+= form_for @user, url: users_path, html: { class: 'container user-new' } do |f|
   .col-md-8.col-md-offset-2
     %header.row.user-nav.row
       .col-md-12
@@ -20,6 +20,8 @@
         = f.email_field :email, autofocus: true, placeholder: 'Email', class: 'user-email', required: true
         %h4 password
         = f.password_field :password, autocomplete: 'off', placeholder: 'Password', class: 'user-password'
+        %h4 password_confirmation
+        = f.password_field :password_confirmation, autocomplete: 'off', placeholder: 'Password', class: 'user-password'
       .col-md-12
         %h4 Occupation
         .user-user-member.row

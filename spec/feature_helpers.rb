@@ -4,9 +4,7 @@ module FeatureHelpers
     fill_in 'user_email', with: user.email
     fill_in 'user_password', with: user.password
     fill_in 'user_password_confirmation', with: user.password
-    attach_file(
-      'user[avatar]', Rails.root.join('spec', 'fixtures', 'images', 'avatar.jpg'), visible: false
-    )
+    attach_file('user[avatar]', Rails.root.join('spec', 'fixtures', 'images', 'avatar.jpg'), visible: false)
     fill_in 'user_position', with: user.position
     fill_in 'user_profile', with: user.profile
     fill_in 'user_occupation', with: user.occupation
