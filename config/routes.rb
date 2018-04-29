@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resource :users, only: %i[edit update]
+  resource :users, only: %i[edit update] do
+    get :mypage
+  end
   devise_for :users
   resources :users, only: :show
 

@@ -1,12 +1,10 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, only: %i[edit update]
+  before_action :set_current_user, only: %i[edit update mypage]
 
-  def edit
-    @user = current_user
-  end
+  def edit; end
 
   def update
-    @user = current_user
     if @user.update(user_params)
       redirect_to root_url, notice: 'ユーザー情報を更新しました。'
       sign_in(current_user, bypass: true)
@@ -23,7 +21,18 @@ class UsersController < ApplicationController
                        .order(created_at: :desc).page(params[:page])
   end
 
+  def mypage
+    @prototypes = @user.prototypes
+                       .includes(:captured_images, :tag_taggings, :tags)
+                       .order(created_at: :desc).page(params[:page])
+    render :show
+  end
+
   private
+
+  def set_current_user
+    @user = current_user
+  end
 
   def user_params
     params.require(:user).permit(
